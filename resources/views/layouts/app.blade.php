@@ -25,7 +25,7 @@
     
 </head>
 <body>
-    <div id="">
+    <div id="app">
         <div id="canvas">
             <div id="box_wrapper">
                 <div class="header_absolute">
@@ -120,6 +120,7 @@
 
                 @yield('content')
 
+                
                 <footer class="page_footer ds top_mask_add s-pb-10 s-pt-70 s-pb-md-40 s-pt-md-85 s-pb-xl-140 s-pt-xl-145">
                     <div class="container">
                         <div class="row">
@@ -144,8 +145,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/pagina.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/pagina.js') }}" defer></script>
         
 </body>
 </html>

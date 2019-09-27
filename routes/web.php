@@ -1,5 +1,7 @@
 <?php
 
+use App\Video;
+use App\Http\Resources\Video as VideoResource;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +19,18 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/videos/pagina', function () { 
+    return VideoResource::collection(Video::whereIn('user_id', [1,2])->orderBy('created_at', 'DESC')->get());
+});
+
 Route::middleware(['auth'])->group(function(){
     Route::get('/usuarios', 'UsuarioController@index');
     Route::post('/usuario/crear/actualizar', 'UsuarioController@crearOactualizar');
+
+    Route::get('/videos/{id}', 'VideoController@index');
+    Route::post('/video/crear/pagina', 'VideoController@crearVideoPagina');
+    Route::post('/video/borrar', 'VideoController@borrar');
+    
 });
 
 

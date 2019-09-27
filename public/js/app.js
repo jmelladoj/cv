@@ -1829,6 +1829,105 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Registrar.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Registrar.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      usuario: '',
+      clave: '',
+      sexo: 0
+    };
+  },
+  methods: {
+    limpiarDatos: function limpiarDatos() {
+      //this.$validator.reset();
+      this.usuario = '';
+      this.clave = '';
+      this.sexo = 0;
+    },
+    registro: function registro() {
+      var _this = this;
+
+      this.$validator.validateAll('registro_usuario').then(function (valido) {
+        if (valido) {
+          var me = _this;
+          me.errors.clear();
+          axios.post('/register', {
+            'usuario': me.usuario,
+            'clave': me.clave,
+            'sexo': me.sexo,
+            'tipo_usuario': 2
+          }).then(function (response) {
+            window.location.href = "/home";
+          })["catch"](function (error) {
+            console.log(error);
+
+            if (error.response.status === 422) {
+              me.errors.add({
+                field: 'registro',
+                msg: 'El usuario ya esta en uso, intenta con otro por favor.'
+              });
+            } else {
+              console.error(error);
+            }
+          });
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Usuarios.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Usuarios.vue?vue&type=script&lang=js& ***!
@@ -2529,212 +2628,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var items = [];
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      usuario: {
+      video: {
         id: 0,
-        nombre: '',
-        telefono: null,
-        usuario: '',
-        clave: '',
-        edad: null,
-        nacionalidad: '',
-        altura: null,
-        busto: null,
-        cintura: null,
-        caderas: null,
-        descripcion: '',
-        perfil: null,
-        imagenes: [],
-        videos: [],
-        avisos: [],
+        titulo: '',
         video: null
       },
-      modal_usuario: {
+      modal_video: {
         titulo: '',
         accion: 0
       },
@@ -2746,13 +2649,8 @@ var items = [];
         sortDirection: 'desc',
         "class": 'text-center'
       }, {
-        key: 'nombre',
-        label: 'NOMBRE',
-        sortable: true,
-        "class": 'text-left'
-      }, {
-        key: 'usuario',
-        label: 'USUARIO',
+        key: 'titulo',
+        label: 'TÍTULO',
         sortable: true,
         "class": 'text-left'
       }, {
@@ -2796,126 +2694,86 @@ var items = [];
         timer: 2000
       });
     },
-    listarUsuarios: function listarUsuarios() {
+    listarVideos: function listarVideos() {
       var me = this;
-      axios.get('/usuarios').then(function (response) {
-        me.items = response.data.usuarios;
+      axios.get('/videos/1').then(function (response) {
+        me.items = response.data.videos;
         me.totalRows = me.items.length;
       })["catch"](function (error) {
         console.log(error.response.data);
       });
     },
-    cerrarModalUsuario: function cerrarModalUsuario() {
-      this.$refs['modal_usuario'].hide();
+    cerrarModalVideo: function cerrarModalVideo() {
+      this.$refs['modal_video'].hide();
     },
     abrirModalVideo: function abrirModalVideo(accion) {
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
       var me = this;
-      this.limpiarDatosUsuario();
+      this.limpiarDatosVideo();
 
       if (accion == 1) {
-        me.modal_usuario.titulo = "Agregar Usuario";
-        me.modal_usuario.accion = 1;
-        me.usuario.imagenes.push(null);
+        me.modal_video.titulo = "Agregar Vídeo";
+        me.modal_video.accion = 1;
       } else if (accion == 2) {
-        me.modal_usuario.titulo = "Modificar Editar";
-        me.modal_usuario.accion = 2;
-        me.usuario.id = data['id'];
-        me.usuario.nombre = data['nombre'];
-        me.usuario.telefono = data['telefono'];
-        me.usuario.usuario = data['usuario'];
-        me.usuario.edad = data['edad'];
-        me.usuario.nacionalidad = data['nacionalidad'];
-        me.usuario.altura = data['altura'];
-        me.usuario.busto = data['busto'];
-        me.usuario.cintura = data['cintura'];
-        me.usuario.caderas = data['caderas'];
-        me.usuario.descripcion = data['descripcion'];
-        me.usuario.perfil = 'storage/' + data['perfil_url'];
+        me.modal_video.titulo = "Modificar Editar";
+        me.modal_video.accion = 2;
+        me.video.id = data['id'];
+        me.video.titulo = data['titulo'];
       }
 
-      this.$refs['modal_usuario'].show();
+      this.$refs['modal_video'].show();
     },
-    limpiarDatosUsuario: function limpiarDatosUsuario() {
-      this.usuario.id = 0;
-      this.usuario.nombre = '';
-      this.usuario.telefono = null;
-      this.usuario.usuario = '';
-      this.usuario.clave = '';
-      this.usuario.edad = null;
-      this.usuario.nacionalidad = '';
-      this.usuario.altura = null;
-      this.usuario.busto = null;
-      this.usuario.cintura = null;
-      this.usuario.caderas = null;
-      this.usuario.descripcion = '';
-      this.usuario.perfil = null;
-      this.usuario.imagenes = [];
-      this.usuario.video = null;
-      this.modal_usuario.titulo = "";
-      this.modal_usuario.accion = 0;
+    limpiarDatosVideo: function limpiarDatosVideo() {
+      this.video.id = 0;
+      this.video.titulo = '';
+      this.video.video = null;
+      this.modal_video.titulo = "";
+      this.modal_video.accion = 0;
     },
-    mostrarFoto: function mostrarFoto(e, index) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        $('#imagen_' + index).attr('src', e.target.result);
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-
-      if (index == 0) {
-        this.usuario.perfil = URL.createObjectURL(e.target.files[0]);
-      } else {
-        if (this.usuario.imagenes.length < 12) {
-          this.usuario.imagenes.push(null);
-        }
-
-        this.usuario.imagenes[index - 1] = URL.createObjectURL(e.target.files[0]);
-      }
-    },
-    crearOactualizar: function crearOactualizar(accion) {
+    subirVideo: function subirVideo() {
       var me = this;
       var formData = new FormData();
-      var mensaje = me.modal_usuario.accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-      var f_perfil = document.querySelector('#perfil');
-      formData.append('imagen_perfil', f_perfil.files[0]);
-      var video = document.querySelector('#video_perfil');
+      var video = document.querySelector('#video');
       formData.append('video', video.files[0]);
-      me.usuario.imagenes.forEach(function (item, index) {
-        var imagen = document.querySelector('#img_' + (index + 1));
-        formData.append('foto_' + (index + 1), imagen.files[0]);
-      });
-      formData.append('accion', this.modal_usuario.accion);
-      formData.append('usuario_id', this.usuario.id);
-      formData.append('nombre', this.usuario.nombre);
-      formData.append('telefono', this.usuario.telefono);
-      formData.append('usuario', this.usuario.usuario);
-      formData.append('clave', this.usuario.clave);
-      formData.append('edad', this.usuario.edad);
-      formData.append('nacionalidad', this.usuario.nacionalidad);
-      formData.append('altura', this.usuario.altura);
-      formData.append('busto', this.usuario.busto);
-      formData.append('cintura', this.usuario.cintura);
-      formData.append('caderas', this.usuario.caderas);
-      formData.append('descripcion', this.usuario.descripcion);
-      formData.append('perfil', this.usuario.perfil);
-      axios.post('/usuario/crear/actualizar', formData).then(function (response) {
-        me.mensaje('success', mensaje);
-        me.listarUsuarios();
-        me.cerrarModalUsuario();
+      formData.append('titulo', this.video.titulo);
+      axios.post('/video/crear/pagina', formData).then(function (response) {
+        me.mensaje('success', 'Registro agregado exitosamente');
+        me.listarVideos();
+        me.cerrarModalVideo();
       })["catch"](function (error) {
-        if (error.response.status == 500 && accion == 1) {
-          me.mensaje('error', 'El usuario ya esta en uso, intenta con otro.');
-        } else {
-          console.error(error);
-        }
+        console.error(error);
+      });
+    },
+    borrar: function borrar(id) {
+      var _this = this;
+
+      Swal.fire({
+        title: '¿Esta seguro de eliminar este vídeo?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger'
+      }).then(function (result) {
+        if (result.value) {
+          var me = _this;
+          axios.post('/video/borrar', {
+            'id': id
+          }).then(function (response) {
+            me.listarVideos();
+            me.mensaje('success', 'El video ha sido borrado');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if (result.dismiss === swal.DismissReason.cancel) {}
       });
     }
   },
   mounted: function mounted() {
-    this.listarUsuarios();
-    this.usuario.imagenes.push(null);
+    this.listarVideos();
   }
 });
 
@@ -73041,6 +72899,236 @@ var e=function(){return(e=Object.assign||function(e){for(var t,r=1,s=arguments.l
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Registrar.vue?vue&type=template&id=6e8e4092&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Registrar.vue?vue&type=template&id=6e8e4092& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    {
+      staticClass:
+        "contacts-section top_mask_add ds overflow-visible background-contact s-pt-70 s-pb-60 s-pt-md-95 s-pb-md-80 s-pt-xl-170 s-pb-xl-140 c-gutter-30",
+      attrs: { id: "publicateEscort" }
+    },
+    [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "fw-divider-space hidden-above-lg mt-20" }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-lg-7 col-xl-8 animate",
+              attrs: { "data-animation": "scaleAppear" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "row" },
+                [
+                  _c("ValidationObserver", {
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var valid = ref.valid
+                          return [
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-6" },
+                              [
+                                _c("ValidationProvider", {
+                                  attrs: {
+                                    name: "nombre de usuario",
+                                    rules: "required",
+                                    bails: false
+                                  },
+                                  scopedSlots: _vm._u(
+                                    [
+                                      {
+                                        key: "default",
+                                        fn: function(ref) {
+                                          var errors = ref.errors
+                                          return [
+                                            _c(
+                                              "div",
+                                              { staticClass: "form-group" },
+                                              [
+                                                _c("input", {
+                                                  staticClass: "form-control",
+                                                  attrs: {
+                                                    type: "text",
+                                                    name: "usuario",
+                                                    placeholder: "Usuario"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "b-alert",
+                                                  {
+                                                    attrs: {
+                                                      variant: "danger",
+                                                      show: errors.length > 0
+                                                    }
+                                                  },
+                                                  _vm._l(errors, function(
+                                                    error,
+                                                    index
+                                                  ) {
+                                                    return _c("label", {
+                                                      key: index,
+                                                      attrs: { for: "" },
+                                                      domProps: {
+                                                        textContent: _vm._s(
+                                                          "* " + error
+                                                        )
+                                                      }
+                                                    })
+                                                  }),
+                                                  0
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        }
+                                      }
+                                    ],
+                                    null,
+                                    true
+                                  )
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-6" },
+                              [
+                                _c("ValidationProvider", {
+                                  attrs: {
+                                    name: "contraseña",
+                                    rules: "required",
+                                    bails: false
+                                  },
+                                  scopedSlots: _vm._u(
+                                    [
+                                      {
+                                        key: "default",
+                                        fn: function(ref) {
+                                          var errors = ref.errors
+                                          return [
+                                            _c(
+                                              "div",
+                                              { staticClass: "form-group" },
+                                              [
+                                                _c("input", {
+                                                  staticClass: "form-control",
+                                                  attrs: {
+                                                    type: "password",
+                                                    name: "contraseña",
+                                                    placeholder: "Contraseña"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "b-alert",
+                                                  {
+                                                    attrs: {
+                                                      variant: "danger",
+                                                      show: errors.length > 0
+                                                    }
+                                                  },
+                                                  _vm._l(errors, function(
+                                                    error,
+                                                    index
+                                                  ) {
+                                                    return _c("label", {
+                                                      key: index,
+                                                      attrs: { for: "" },
+                                                      domProps: {
+                                                        textContent: _vm._s(
+                                                          "* " + error
+                                                        )
+                                                      }
+                                                    })
+                                                  }),
+                                                  0
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        }
+                                      }
+                                    ],
+                                    null,
+                                    true
+                                  )
+                                })
+                              ],
+                              1
+                            )
+                          ]
+                        }
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
+            ]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "col-lg-5 col-xl-4 animate",
+        attrs: { "data-animation": "scaleAppear" }
+      },
+      [
+        _c("h2", { staticClass: "mt-0 mb-40 contact-title text-uppercase" }, [
+          _vm._v("PUBLICATE EN")
+        ]),
+        _vm._v(" "),
+        _c(
+          "span",
+          { staticClass: "color-main fs-24 font-main text-uppercase" },
+          [_vm._v("CLUBVIP.CL")]
+        )
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Usuarios.vue?vue&type=template&id=0d357df0&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Usuarios.vue?vue&type=template&id=0d357df0& ***!
@@ -75334,7 +75422,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "btn btn-info d-lg-block m-l-15",
-                        attrs: { title: "Agrega un usuario a la plataforma" },
+                        attrs: {
+                          title: "Agrega un vídeo a la página de inicio"
+                        },
                         on: {
                           click: function($event) {
                             return _vm.abrirModalVideo(1)
@@ -75343,7 +75433,7 @@ var render = function() {
                       },
                       [
                         _c("i", { staticClass: "fa fa-plus-circle" }),
-                        _vm._v(" Agregar Usuario")
+                        _vm._v(" Agregar Vídeo")
                       ]
                     )
                   ],
@@ -75673,186 +75763,6 @@ var render = function() {
                                       key: "cell(acciones)",
                                       fn: function(data) {
                                         return [
-                                          _c(
-                                            "b-button",
-                                            {
-                                              attrs: {
-                                                size: "xs",
-                                                variant: "warning",
-                                                title: "Actualizar modelo"
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.abrirModalVideo(
-                                                    2,
-                                                    data.item
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass: "fa fa-pencil"
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "b-button",
-                                            {
-                                              attrs: {
-                                                size: "xs",
-                                                variant: "success",
-                                                title:
-                                                  "Administrar videos del usuario"
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.abrirModalVideos(
-                                                    data.item.id
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass: "fa fa-play"
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "b-button",
-                                            {
-                                              attrs: {
-                                                size: "xs",
-                                                variant: "success",
-                                                title:
-                                                  "Administrar publicaciones del usuario"
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.abrirModalAviso(
-                                                    data.item.id
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass: "fa fa-list"
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          data.item.agencia == 1
-                                            ? [
-                                                _c(
-                                                  "b-button",
-                                                  {
-                                                    attrs: {
-                                                      size: "xs",
-                                                      variant: "danger",
-                                                      title:
-                                                        "Quitar de la agencia"
-                                                    },
-                                                    on: {
-                                                      click: function($event) {
-                                                        return _vm.agregarQuitarAgencia(
-                                                          data.item.id,
-                                                          1
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("i", {
-                                                      staticClass:
-                                                        "fa fa-star-o"
-                                                    })
-                                                  ]
-                                                )
-                                              ]
-                                            : [
-                                                _c(
-                                                  "b-button",
-                                                  {
-                                                    attrs: {
-                                                      size: "xs",
-                                                      variant: "success",
-                                                      title:
-                                                        "Añadir a la agencia"
-                                                    },
-                                                    on: {
-                                                      click: function($event) {
-                                                        return _vm.agregarQuitarAgencia(
-                                                          data.item.id,
-                                                          2
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("i", {
-                                                      staticClass: "fa fa-star"
-                                                    })
-                                                  ]
-                                                )
-                                              ],
-                                          _vm._v(" "),
-                                          data.item.visible == 1
-                                            ? [
-                                                _c(
-                                                  "b-button",
-                                                  {
-                                                    attrs: {
-                                                      size: "xs",
-                                                      variant: "danger",
-                                                      title: "Ocultar modelo"
-                                                    },
-                                                    on: {
-                                                      click: function($event) {
-                                                        return _vm.ocultarMostrarUsuario(
-                                                          data.item.id,
-                                                          1
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("i", {
-                                                      staticClass:
-                                                        "fa fa-eye-slash"
-                                                    })
-                                                  ]
-                                                )
-                                              ]
-                                            : [
-                                                _c(
-                                                  "b-button",
-                                                  {
-                                                    attrs: {
-                                                      size: "xs",
-                                                      variant: "success",
-                                                      title: "Mostrar modelo"
-                                                    },
-                                                    on: {
-                                                      click: function($event) {
-                                                        return _vm.ocultarMostrarUsuario(
-                                                          data.item.id,
-                                                          2
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("i", {
-                                                      staticClass: "fa fa-eye"
-                                                    })
-                                                  ]
-                                                )
-                                              ],
-                                          _vm._v(" "),
                                           [
                                             _c(
                                               "b-button",
@@ -75969,10 +75879,10 @@ var render = function() {
                     _c(
                       "b-modal",
                       {
-                        ref: "modal_usuario",
+                        ref: "modal_video",
                         attrs: {
-                          size: "lg",
-                          title: _vm.modal_usuario.titulo,
+                          size: "md",
+                          title: _vm.modal_video.titulo,
                           "no-close-on-backdrop": ""
                         }
                       },
@@ -75980,1419 +75890,86 @@ var render = function() {
                         _c(
                           "b-form",
                           [
-                            _c(
-                              "b-form-group",
-                              [
-                                _c(
-                                  "b-row",
-                                  [
-                                    _c(
-                                      "b-col",
-                                      { attrs: { lg: "4", md: "4", sm: "4" } },
-                                      [
-                                        _c(
-                                          "h4",
-                                          { staticClass: "text-center" },
-                                          [
-                                            _vm._v(
-                                              "Foto de perfil (Obligatorio)"
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
+                            _c("ValidationProvider", {
+                              attrs: {
+                                name: "Título del vídeo",
+                                rules: "required|alpha_spaces",
+                                bails: false
+                              },
+                              scopedSlots: _vm._u(
+                                [
+                                  {
+                                    key: "default",
+                                    fn: function(ref) {
+                                      var errors = ref.errors
+                                      return [
                                         _c(
                                           "b-form-group",
+                                          { attrs: { label: "Título" } },
                                           [
-                                            _c("b-img", {
-                                              attrs: {
-                                                src: _vm.usuario.perfil,
-                                                fluid: "",
-                                                id: "imagen_0",
-                                                name: "imagen_0"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "b-form-group",
-                                          [
-                                            _c("b-form-file", {
-                                              attrs: {
-                                                id: "perfil",
-                                                name: "perfil",
-                                                accept: "image/*",
-                                                placeholder: "Sin archivo"
-                                              },
-                                              on: {
-                                                change: function($event) {
-                                                  return _vm.mostrarFoto(
-                                                    $event,
-                                                    0
+                                            _c("b-form-input", {
+                                              attrs: { type: "text" },
+                                              model: {
+                                                value: _vm.video.titulo,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.video,
+                                                    "titulo",
+                                                    $$v
                                                   )
-                                                }
+                                                },
+                                                expression: "video.titulo"
                                               }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-col",
-                                      { attrs: { lg: "8", md: "8", sm: "8" } },
-                                      [
-                                        _c(
-                                          "h4",
-                                          { staticClass: "text-center" },
-                                          [_vm._v("Datos")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "b-row",
-                                          [
-                                            _c(
-                                              "b-col",
-                                              {
-                                                attrs: {
-                                                  lg: "6",
-                                                  md: "6",
-                                                  sm: "6"
-                                                }
-                                              },
-                                              [
-                                                _c("ValidationProvider", {
-                                                  attrs: {
-                                                    name: "nombre de modelo",
-                                                    rules:
-                                                      "required|alpha_spaces",
-                                                    bails: false
-                                                  },
-                                                  scopedSlots: _vm._u(
-                                                    [
-                                                      {
-                                                        key: "default",
-                                                        fn: function(ref) {
-                                                          var errors =
-                                                            ref.errors
-                                                          return [
-                                                            _c(
-                                                              "b-form-group",
-                                                              {
-                                                                attrs: {
-                                                                  label:
-                                                                    "Nombre"
-                                                                }
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "b-form-input",
-                                                                  {
-                                                                    attrs: {
-                                                                      type:
-                                                                        "text"
-                                                                    },
-                                                                    model: {
-                                                                      value:
-                                                                        _vm
-                                                                          .usuario
-                                                                          .nombre,
-                                                                      callback: function(
-                                                                        $$v
-                                                                      ) {
-                                                                        _vm.$set(
-                                                                          _vm.usuario,
-                                                                          "nombre",
-                                                                          $$v
-                                                                        )
-                                                                      },
-                                                                      expression:
-                                                                        "usuario.nombre"
-                                                                    }
-                                                                  }
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "b-alert",
-                                                                  {
-                                                                    attrs: {
-                                                                      variant:
-                                                                        "danger",
-                                                                      show:
-                                                                        errors.length >
-                                                                        0
-                                                                    }
-                                                                  },
-                                                                  _vm._l(
-                                                                    errors,
-                                                                    function(
-                                                                      error,
-                                                                      index
-                                                                    ) {
-                                                                      return _c(
-                                                                        "label",
-                                                                        {
-                                                                          key: index,
-                                                                          attrs: {
-                                                                            for:
-                                                                              ""
-                                                                          },
-                                                                          domProps: {
-                                                                            textContent: _vm._s(
-                                                                              "* " +
-                                                                                error
-                                                                            )
-                                                                          }
-                                                                        }
-                                                                      )
-                                                                    }
-                                                                  ),
-                                                                  0
-                                                                )
-                                                              ],
-                                                              1
-                                                            )
-                                                          ]
-                                                        }
-                                                      }
-                                                    ],
-                                                    null,
-                                                    true
-                                                  )
-                                                })
-                                              ],
-                                              1
-                                            ),
+                                            }),
                                             _vm._v(" "),
                                             _c(
-                                              "b-col",
+                                              "b-alert",
                                               {
                                                 attrs: {
-                                                  lg: "6",
-                                                  md: "6",
-                                                  sm: "6"
+                                                  variant: "danger",
+                                                  show: errors.length > 0
                                                 }
                                               },
-                                              [
-                                                _c("ValidationProvider", {
-                                                  attrs: {
-                                                    name: "teléfono",
-                                                    rules:
-                                                      "required|numeric|digits:9",
-                                                    bails: false
-                                                  },
-                                                  scopedSlots: _vm._u(
-                                                    [
-                                                      {
-                                                        key: "default",
-                                                        fn: function(ref) {
-                                                          var errors =
-                                                            ref.errors
-                                                          return [
-                                                            _c(
-                                                              "b-form-group",
-                                                              {
-                                                                attrs: {
-                                                                  label:
-                                                                    "Telefóno"
-                                                                }
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "b-form-input",
-                                                                  {
-                                                                    attrs: {
-                                                                      type:
-                                                                        "number"
-                                                                    },
-                                                                    model: {
-                                                                      value:
-                                                                        _vm
-                                                                          .usuario
-                                                                          .telefono,
-                                                                      callback: function(
-                                                                        $$v
-                                                                      ) {
-                                                                        _vm.$set(
-                                                                          _vm.usuario,
-                                                                          "telefono",
-                                                                          $$v
-                                                                        )
-                                                                      },
-                                                                      expression:
-                                                                        "usuario.telefono"
-                                                                    }
-                                                                  }
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "b-alert",
-                                                                  {
-                                                                    attrs: {
-                                                                      variant:
-                                                                        "danger",
-                                                                      show:
-                                                                        errors.length >
-                                                                        0
-                                                                    }
-                                                                  },
-                                                                  _vm._l(
-                                                                    errors,
-                                                                    function(
-                                                                      error,
-                                                                      index
-                                                                    ) {
-                                                                      return _c(
-                                                                        "label",
-                                                                        {
-                                                                          key: index,
-                                                                          attrs: {
-                                                                            for:
-                                                                              ""
-                                                                          },
-                                                                          domProps: {
-                                                                            textContent: _vm._s(
-                                                                              "* " +
-                                                                                error
-                                                                            )
-                                                                          }
-                                                                        }
-                                                                      )
-                                                                    }
-                                                                  ),
-                                                                  0
-                                                                )
-                                                              ],
-                                                              1
-                                                            )
-                                                          ]
-                                                        }
-                                                      }
-                                                    ],
-                                                    null,
-                                                    true
-                                                  )
-                                                })
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "b-row",
-                                          [
-                                            _c(
-                                              "b-col",
-                                              {
-                                                attrs: {
-                                                  lg: "6",
-                                                  md: "6",
-                                                  sm: "6"
-                                                }
-                                              },
-                                              [
-                                                _c("ValidationProvider", {
-                                                  attrs: {
-                                                    name: "nombre de usuario",
-                                                    rules: "required",
-                                                    bails: false
-                                                  },
-                                                  scopedSlots: _vm._u(
-                                                    [
-                                                      {
-                                                        key: "default",
-                                                        fn: function(ref) {
-                                                          var errors =
-                                                            ref.errors
-                                                          return [
-                                                            _c(
-                                                              "b-form-group",
-                                                              {
-                                                                attrs: {
-                                                                  label:
-                                                                    "Nombre de usuario"
-                                                                }
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "b-form-input",
-                                                                  {
-                                                                    attrs: {
-                                                                      type:
-                                                                        "text",
-                                                                      readonly:
-                                                                        _vm
-                                                                          .modal_usuario
-                                                                          .accion ==
-                                                                        2
-                                                                    },
-                                                                    model: {
-                                                                      value:
-                                                                        _vm
-                                                                          .usuario
-                                                                          .usuario,
-                                                                      callback: function(
-                                                                        $$v
-                                                                      ) {
-                                                                        _vm.$set(
-                                                                          _vm.usuario,
-                                                                          "usuario",
-                                                                          $$v
-                                                                        )
-                                                                      },
-                                                                      expression:
-                                                                        "usuario.usuario"
-                                                                    }
-                                                                  }
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "b-alert",
-                                                                  {
-                                                                    attrs: {
-                                                                      variant:
-                                                                        "danger",
-                                                                      show:
-                                                                        errors.length >
-                                                                        0
-                                                                    }
-                                                                  },
-                                                                  _vm._l(
-                                                                    errors,
-                                                                    function(
-                                                                      error,
-                                                                      index
-                                                                    ) {
-                                                                      return _c(
-                                                                        "label",
-                                                                        {
-                                                                          key: index,
-                                                                          attrs: {
-                                                                            for:
-                                                                              ""
-                                                                          },
-                                                                          domProps: {
-                                                                            textContent: _vm._s(
-                                                                              "* " +
-                                                                                error
-                                                                            )
-                                                                          }
-                                                                        }
-                                                                      )
-                                                                    }
-                                                                  ),
-                                                                  0
-                                                                )
-                                                              ],
-                                                              1
-                                                            )
-                                                          ]
-                                                        }
-                                                      }
-                                                    ],
-                                                    null,
-                                                    true
-                                                  )
-                                                })
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "b-col",
-                                              {
-                                                attrs: {
-                                                  lg: "6",
-                                                  md: "6",
-                                                  sm: "6"
-                                                }
-                                              },
-                                              [
-                                                _c("ValidationProvider", {
-                                                  attrs: {
-                                                    name: "clave",
-                                                    rules:
-                                                      _vm.modal_usuario
-                                                        .accion == 1
-                                                        ? "required"
-                                                        : "",
-                                                    bails: false
-                                                  },
-                                                  scopedSlots: _vm._u(
-                                                    [
-                                                      {
-                                                        key: "default",
-                                                        fn: function(ref) {
-                                                          var errors =
-                                                            ref.errors
-                                                          return [
-                                                            _c(
-                                                              "b-form-group",
-                                                              {
-                                                                attrs: {
-                                                                  label: "Clave"
-                                                                }
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "b-form-input",
-                                                                  {
-                                                                    attrs: {
-                                                                      type:
-                                                                        "password"
-                                                                    },
-                                                                    model: {
-                                                                      value:
-                                                                        _vm
-                                                                          .usuario
-                                                                          .clave,
-                                                                      callback: function(
-                                                                        $$v
-                                                                      ) {
-                                                                        _vm.$set(
-                                                                          _vm.usuario,
-                                                                          "clave",
-                                                                          $$v
-                                                                        )
-                                                                      },
-                                                                      expression:
-                                                                        "usuario.clave"
-                                                                    }
-                                                                  }
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "b-alert",
-                                                                  {
-                                                                    attrs: {
-                                                                      variant:
-                                                                        "danger",
-                                                                      show:
-                                                                        errors.length >
-                                                                        0
-                                                                    }
-                                                                  },
-                                                                  _vm._l(
-                                                                    errors,
-                                                                    function(
-                                                                      error,
-                                                                      index
-                                                                    ) {
-                                                                      return _c(
-                                                                        "label",
-                                                                        {
-                                                                          key: index,
-                                                                          attrs: {
-                                                                            for:
-                                                                              ""
-                                                                          },
-                                                                          domProps: {
-                                                                            textContent: _vm._s(
-                                                                              "* " +
-                                                                                error
-                                                                            )
-                                                                          }
-                                                                        }
-                                                                      )
-                                                                    }
-                                                                  ),
-                                                                  0
-                                                                )
-                                                              ],
-                                                              1
-                                                            )
-                                                          ]
-                                                        }
-                                                      }
-                                                    ],
-                                                    null,
-                                                    true
-                                                  )
-                                                })
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "b-row",
-                                          [
-                                            _c(
-                                              "b-col",
-                                              {
-                                                attrs: {
-                                                  lg: "6",
-                                                  md: "6",
-                                                  sm: "6"
-                                                }
-                                              },
-                                              [
-                                                _c("ValidationProvider", {
-                                                  attrs: {
-                                                    name: "edad",
-                                                    rules:
-                                                      "required|numeric|between:18,99",
-                                                    bails: false
-                                                  },
-                                                  scopedSlots: _vm._u(
-                                                    [
-                                                      {
-                                                        key: "default",
-                                                        fn: function(ref) {
-                                                          var errors =
-                                                            ref.errors
-                                                          return [
-                                                            _c(
-                                                              "b-form-group",
-                                                              {
-                                                                attrs: {
-                                                                  label: "Edad"
-                                                                }
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "b-form-input",
-                                                                  {
-                                                                    attrs: {
-                                                                      type:
-                                                                        "number"
-                                                                    },
-                                                                    model: {
-                                                                      value:
-                                                                        _vm
-                                                                          .usuario
-                                                                          .edad,
-                                                                      callback: function(
-                                                                        $$v
-                                                                      ) {
-                                                                        _vm.$set(
-                                                                          _vm.usuario,
-                                                                          "edad",
-                                                                          $$v
-                                                                        )
-                                                                      },
-                                                                      expression:
-                                                                        "usuario.edad"
-                                                                    }
-                                                                  }
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "b-alert",
-                                                                  {
-                                                                    attrs: {
-                                                                      variant:
-                                                                        "danger",
-                                                                      show:
-                                                                        errors.length >
-                                                                        0
-                                                                    }
-                                                                  },
-                                                                  _vm._l(
-                                                                    errors,
-                                                                    function(
-                                                                      error,
-                                                                      index
-                                                                    ) {
-                                                                      return _c(
-                                                                        "label",
-                                                                        {
-                                                                          key: index,
-                                                                          attrs: {
-                                                                            for:
-                                                                              ""
-                                                                          },
-                                                                          domProps: {
-                                                                            textContent: _vm._s(
-                                                                              "* " +
-                                                                                error
-                                                                            )
-                                                                          }
-                                                                        }
-                                                                      )
-                                                                    }
-                                                                  ),
-                                                                  0
-                                                                )
-                                                              ],
-                                                              1
-                                                            )
-                                                          ]
-                                                        }
-                                                      }
-                                                    ],
-                                                    null,
-                                                    true
-                                                  )
-                                                })
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "b-col",
-                                              {
-                                                attrs: {
-                                                  lg: "6",
-                                                  md: "6",
-                                                  sm: "6"
-                                                }
-                                              },
-                                              [
-                                                _c("ValidationProvider", {
-                                                  attrs: {
-                                                    name: "nacionalidad",
-                                                    rules:
-                                                      "required|alpha_spaces",
-                                                    bails: false
-                                                  },
-                                                  scopedSlots: _vm._u(
-                                                    [
-                                                      {
-                                                        key: "default",
-                                                        fn: function(ref) {
-                                                          var errors =
-                                                            ref.errors
-                                                          return [
-                                                            _c(
-                                                              "b-form-group",
-                                                              {
-                                                                attrs: {
-                                                                  label:
-                                                                    "Nacionalidad"
-                                                                }
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "b-form-input",
-                                                                  {
-                                                                    attrs: {
-                                                                      type:
-                                                                        "text"
-                                                                    },
-                                                                    model: {
-                                                                      value:
-                                                                        _vm
-                                                                          .usuario
-                                                                          .nacionalidad,
-                                                                      callback: function(
-                                                                        $$v
-                                                                      ) {
-                                                                        _vm.$set(
-                                                                          _vm.usuario,
-                                                                          "nacionalidad",
-                                                                          $$v
-                                                                        )
-                                                                      },
-                                                                      expression:
-                                                                        "usuario.nacionalidad"
-                                                                    }
-                                                                  }
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "b-alert",
-                                                                  {
-                                                                    attrs: {
-                                                                      variant:
-                                                                        "danger",
-                                                                      show:
-                                                                        errors.length >
-                                                                        0
-                                                                    }
-                                                                  },
-                                                                  _vm._l(
-                                                                    errors,
-                                                                    function(
-                                                                      error,
-                                                                      index
-                                                                    ) {
-                                                                      return _c(
-                                                                        "label",
-                                                                        {
-                                                                          key: index,
-                                                                          attrs: {
-                                                                            for:
-                                                                              ""
-                                                                          },
-                                                                          domProps: {
-                                                                            textContent: _vm._s(
-                                                                              "* " +
-                                                                                error
-                                                                            )
-                                                                          }
-                                                                        }
-                                                                      )
-                                                                    }
-                                                                  ),
-                                                                  0
-                                                                )
-                                                              ],
-                                                              1
-                                                            )
-                                                          ]
-                                                        }
-                                                      }
-                                                    ],
-                                                    null,
-                                                    true
-                                                  )
-                                                })
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("br"),
-                                _vm._v(" "),
-                                _c(
-                                  "b-row",
-                                  [
-                                    _c(
-                                      "b-col",
-                                      { attrs: { lg: "3", md: "3", sm: "3" } },
-                                      [
-                                        _c("ValidationProvider", {
-                                          attrs: {
-                                            name: "altura",
-                                            rules: "required|between:1,2",
-                                            bails: false
-                                          },
-                                          scopedSlots: _vm._u(
-                                            [
-                                              {
-                                                key: "default",
-                                                fn: function(ref) {
-                                                  var errors = ref.errors
-                                                  return [
-                                                    _c(
-                                                      "b-form-group",
-                                                      {
-                                                        attrs: {
-                                                          label: "Altura(MT)"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("b-form-input", {
-                                                          attrs: {
-                                                            type: "number",
-                                                            step: "any"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.usuario
-                                                                .altura,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.usuario,
-                                                                "altura",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "usuario.altura"
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "b-alert",
-                                                          {
-                                                            attrs: {
-                                                              variant: "danger",
-                                                              show:
-                                                                errors.length >
-                                                                0
-                                                            }
-                                                          },
-                                                          _vm._l(
-                                                            errors,
-                                                            function(
-                                                              error,
-                                                              index
-                                                            ) {
-                                                              return _c(
-                                                                "label",
-                                                                {
-                                                                  key: index,
-                                                                  attrs: {
-                                                                    for: ""
-                                                                  },
-                                                                  domProps: {
-                                                                    textContent: _vm._s(
-                                                                      "* " +
-                                                                        error
-                                                                    )
-                                                                  }
-                                                                }
-                                                              )
-                                                            }
-                                                          ),
-                                                          0
-                                                        )
-                                                      ],
-                                                      1
+                                              _vm._l(errors, function(
+                                                error,
+                                                index
+                                              ) {
+                                                return _c("label", {
+                                                  key: index,
+                                                  attrs: { for: "" },
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      "* " + error
                                                     )
-                                                  ]
-                                                }
-                                              }
-                                            ],
-                                            null,
-                                            true
-                                          )
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-col",
-                                      { attrs: { lg: "3", md: "3", sm: "3" } },
-                                      [
-                                        _c("ValidationProvider", {
-                                          attrs: {
-                                            name: "busto",
-                                            rules:
-                                              "required|numeric|between:1,250",
-                                            bails: false
-                                          },
-                                          scopedSlots: _vm._u(
-                                            [
-                                              {
-                                                key: "default",
-                                                fn: function(ref) {
-                                                  var errors = ref.errors
-                                                  return [
-                                                    _c(
-                                                      "b-form-group",
-                                                      {
-                                                        attrs: {
-                                                          label: "Busto(CM)"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("b-form-input", {
-                                                          attrs: {
-                                                            type: "number"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.usuario.busto,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.usuario,
-                                                                "busto",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "usuario.busto"
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "b-alert",
-                                                          {
-                                                            attrs: {
-                                                              variant: "danger",
-                                                              show:
-                                                                errors.length >
-                                                                0
-                                                            }
-                                                          },
-                                                          _vm._l(
-                                                            errors,
-                                                            function(
-                                                              error,
-                                                              index
-                                                            ) {
-                                                              return _c(
-                                                                "label",
-                                                                {
-                                                                  key: index,
-                                                                  attrs: {
-                                                                    for: ""
-                                                                  },
-                                                                  domProps: {
-                                                                    textContent: _vm._s(
-                                                                      "* " +
-                                                                        error
-                                                                    )
-                                                                  }
-                                                                }
-                                                              )
-                                                            }
-                                                          ),
-                                                          0
-                                                        )
-                                                      ],
-                                                      1
-                                                    )
-                                                  ]
-                                                }
-                                              }
-                                            ],
-                                            null,
-                                            true
-                                          )
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-col",
-                                      { attrs: { lg: "3", md: "3", sm: "3" } },
-                                      [
-                                        _c("ValidationProvider", {
-                                          attrs: {
-                                            name: "cintura",
-                                            rules:
-                                              "required|numeric|between:1,250",
-                                            bails: false
-                                          },
-                                          scopedSlots: _vm._u(
-                                            [
-                                              {
-                                                key: "default",
-                                                fn: function(ref) {
-                                                  var errors = ref.errors
-                                                  return [
-                                                    _c(
-                                                      "b-form-group",
-                                                      {
-                                                        attrs: {
-                                                          label: "Cintura(CM)"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("b-form-input", {
-                                                          attrs: {
-                                                            type: "number"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.usuario
-                                                                .cintura,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.usuario,
-                                                                "cintura",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "usuario.cintura"
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "b-alert",
-                                                          {
-                                                            attrs: {
-                                                              variant: "danger",
-                                                              show:
-                                                                errors.length >
-                                                                0
-                                                            }
-                                                          },
-                                                          _vm._l(
-                                                            errors,
-                                                            function(
-                                                              error,
-                                                              index
-                                                            ) {
-                                                              return _c(
-                                                                "label",
-                                                                {
-                                                                  key: index,
-                                                                  attrs: {
-                                                                    for: ""
-                                                                  },
-                                                                  domProps: {
-                                                                    textContent: _vm._s(
-                                                                      "* " +
-                                                                        error
-                                                                    )
-                                                                  }
-                                                                }
-                                                              )
-                                                            }
-                                                          ),
-                                                          0
-                                                        )
-                                                      ],
-                                                      1
-                                                    )
-                                                  ]
-                                                }
-                                              }
-                                            ],
-                                            null,
-                                            true
-                                          )
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-col",
-                                      { attrs: { lg: "3", md: "3", sm: "3" } },
-                                      [
-                                        _c("ValidationProvider", {
-                                          attrs: {
-                                            name: "caderas",
-                                            rules:
-                                              "required|numeric|between:1,250",
-                                            bails: false
-                                          },
-                                          scopedSlots: _vm._u(
-                                            [
-                                              {
-                                                key: "default",
-                                                fn: function(ref) {
-                                                  var errors = ref.errors
-                                                  return [
-                                                    _c(
-                                                      "b-form-group",
-                                                      {
-                                                        attrs: {
-                                                          label: "Caderas(CM)"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("b-form-input", {
-                                                          attrs: {
-                                                            type: "number"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.usuario
-                                                                .caderas,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.usuario,
-                                                                "caderas",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "usuario.caderas"
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "b-alert",
-                                                          {
-                                                            attrs: {
-                                                              variant: "danger",
-                                                              show:
-                                                                errors.length >
-                                                                0
-                                                            }
-                                                          },
-                                                          _vm._l(
-                                                            errors,
-                                                            function(
-                                                              error,
-                                                              index
-                                                            ) {
-                                                              return _c(
-                                                                "label",
-                                                                {
-                                                                  key: index,
-                                                                  attrs: {
-                                                                    for: ""
-                                                                  },
-                                                                  domProps: {
-                                                                    textContent: _vm._s(
-                                                                      "* " +
-                                                                        error
-                                                                    )
-                                                                  }
-                                                                }
-                                                              )
-                                                            }
-                                                          ),
-                                                          0
-                                                        )
-                                                      ],
-                                                      1
-                                                    )
-                                                  ]
-                                                }
-                                              }
-                                            ],
-                                            null,
-                                            true
-                                          )
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "b-row",
-                                  [
-                                    _c(
-                                      "b-col",
-                                      {
-                                        attrs: { lg: "12", md: "12", sm: "12" }
-                                      },
-                                      [
-                                        _c(
-                                          "b-form-group",
-                                          {
-                                            attrs: {
-                                              label: "Vídeo",
-                                              "label-for": "video",
-                                              "label-cols-sm": "2"
-                                            }
-                                          },
-                                          [
-                                            _c("b-form-file", {
-                                              attrs: {
-                                                id: "video_perfil",
-                                                name: "video_perfil",
-                                                accept: "video/*",
-                                                placeholder:
-                                                  "Ningún archivo elegido"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "b-row",
-                                  [
-                                    _c(
-                                      "b-col",
-                                      {
-                                        attrs: { lg: "12", md: "12", sm: "12" }
-                                      },
-                                      [
-                                        _c("ValidationProvider", {
-                                          attrs: {
-                                            name: "descripción",
-                                            rules: "required",
-                                            bails: false
-                                          },
-                                          scopedSlots: _vm._u(
-                                            [
-                                              {
-                                                key: "default",
-                                                fn: function(ref) {
-                                                  var errors = ref.errors
-                                                  return [
-                                                    _c(
-                                                      "b-form-group",
-                                                      {
-                                                        attrs: {
-                                                          label: "Descripción"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("b-form-textarea", {
-                                                          attrs: {
-                                                            rows: "3",
-                                                            "max-rows": "6"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.usuario
-                                                                .descripcion,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.usuario,
-                                                                "descripcion",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "usuario.descripcion"
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "b-alert",
-                                                          {
-                                                            attrs: {
-                                                              variant: "danger",
-                                                              show:
-                                                                errors.length >
-                                                                0
-                                                            }
-                                                          },
-                                                          _vm._l(
-                                                            errors,
-                                                            function(
-                                                              error,
-                                                              index
-                                                            ) {
-                                                              return _c(
-                                                                "label",
-                                                                {
-                                                                  key: index,
-                                                                  attrs: {
-                                                                    for: ""
-                                                                  },
-                                                                  domProps: {
-                                                                    textContent: _vm._s(
-                                                                      "* " +
-                                                                        error
-                                                                    )
-                                                                  }
-                                                                }
-                                                              )
-                                                            }
-                                                          ),
-                                                          0
-                                                        )
-                                                      ],
-                                                      1
-                                                    )
-                                                  ]
-                                                }
-                                              }
-                                            ],
-                                            null,
-                                            true
-                                          )
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("hr"),
-                                _vm._v(" "),
-                                _c(
-                                  "b-row",
-                                  [
-                                    _c(
-                                      "b-col",
-                                      {
-                                        attrs: { lg: "12", md: "12", sm: "12" }
-                                      },
-                                      [
-                                        _c(
-                                          "h4",
-                                          {
-                                            staticClass:
-                                              "card-title text-center"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "Fotos de galería (12 como máximo)"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "b-row",
-                                  _vm._l(_vm.usuario.imagenes, function(
-                                    imagen,
-                                    index
-                                  ) {
-                                    return _c(
-                                      "b-col",
-                                      {
-                                        key: index,
-                                        attrs: { lg: "3", md: "3", sm: "3" }
-                                      },
-                                      [
-                                        _vm.usuario.imagenes[index]
-                                          ? _c(
-                                              "b-form-group",
-                                              [
-                                                _c("b-img", {
-                                                  staticClass: "alinear-fotos",
-                                                  attrs: {
-                                                    src:
-                                                      _vm.usuario.imagenes[
-                                                        index
-                                                      ],
-                                                    fluid: "",
-                                                    id: "imagen_" + (index + 1),
-                                                    name:
-                                                      "imagen_" + (index + 1)
                                                   }
                                                 })
-                                              ],
-                                              1
+                                              }),
+                                              0
                                             )
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _c(
-                                          "b-form-group",
-                                          [
-                                            _c("b-form-file", {
-                                              attrs: {
-                                                id: "img_" + (index + 1),
-                                                name: "img_" + (index + 1),
-                                                accept: "image/*",
-                                                placeholder: "Sin archivo"
-                                              },
-                                              on: {
-                                                change: function($event) {
-                                                  _vm.mostrarFoto(
-                                                    $event,
-                                                    index + 1
-                                                  )
-                                                }
-                                              }
-                                            })
                                           ],
                                           1
                                         )
-                                      ],
-                                      1
-                                    )
-                                  }),
-                                  1
-                                )
+                                      ]
+                                    }
+                                  }
+                                ],
+                                null,
+                                true
+                              )
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "b-form-group",
+                              { attrs: { label: "Vídeo" } },
+                              [
+                                _c("b-form-file", {
+                                  attrs: {
+                                    id: "video",
+                                    name: "video",
+                                    accept: "video/*",
+                                    placeholder: "Ningún archivo elegido"
+                                  }
+                                })
                               ],
                               1
                             )
@@ -77411,8 +75988,8 @@ var render = function() {
                                   {
                                     name: "show",
                                     rawName: "v-show",
-                                    value: _vm.modal_usuario.accion == 1,
-                                    expression: "modal_usuario.accion == 1"
+                                    value: _vm.modal_video.accion == 1,
+                                    expression: "modal_video.accion == 1"
                                   }
                                 ],
                                 attrs: {
@@ -77422,7 +75999,7 @@ var render = function() {
                                 },
                                 on: {
                                   click: function($event) {
-                                    return _vm.crearOactualizar(1)
+                                    return _vm.subirVideo()
                                   }
                                 }
                               },
@@ -77436,14 +76013,14 @@ var render = function() {
                                   {
                                     name: "show",
                                     rawName: "v-show",
-                                    value: _vm.modal_usuario.accion == 2,
-                                    expression: "modal_usuario.accion == 2"
+                                    value: _vm.modal_video.accion == 2,
+                                    expression: "modal_video.accion == 2"
                                   }
                                 ],
                                 attrs: { size: "md", variant: "warning" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.crearOactualizar(2)
+                                    return _vm.subirVideo()
                                   }
                                 }
                               },
@@ -77456,7 +76033,7 @@ var render = function() {
                                 attrs: { size: "md", variant: "danger" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.cerrarModalUsuario()
+                                    return _vm.cerrarModalVideo()
                                   }
                                 }
                               },
@@ -89678,6 +88255,7 @@ Vue.component('ValidationObserver', vee_validate__WEBPACK_IMPORTED_MODULE_1__["V
 Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
 Vue.component('usuarios', __webpack_require__(/*! ./components/Usuarios.vue */ "./resources/js/components/Usuarios.vue")["default"]);
 Vue.component('videos', __webpack_require__(/*! ./components/Videos.vue */ "./resources/js/components/Videos.vue")["default"]);
+Vue.component('registrar', __webpack_require__(/*! ./components/Registrar.vue */ "./resources/js/components/Registrar.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -89748,6 +88326,75 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/Registrar.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/Registrar.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Registrar_vue_vue_type_template_id_6e8e4092___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Registrar.vue?vue&type=template&id=6e8e4092& */ "./resources/js/components/Registrar.vue?vue&type=template&id=6e8e4092&");
+/* harmony import */ var _Registrar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Registrar.vue?vue&type=script&lang=js& */ "./resources/js/components/Registrar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Registrar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Registrar_vue_vue_type_template_id_6e8e4092___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Registrar_vue_vue_type_template_id_6e8e4092___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Registrar.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Registrar.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Registrar.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Registrar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Registrar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Registrar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Registrar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Registrar.vue?vue&type=template&id=6e8e4092&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/Registrar.vue?vue&type=template&id=6e8e4092& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Registrar_vue_vue_type_template_id_6e8e4092___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Registrar.vue?vue&type=template&id=6e8e4092& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Registrar.vue?vue&type=template&id=6e8e4092&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Registrar_vue_vue_type_template_id_6e8e4092___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Registrar_vue_vue_type_template_id_6e8e4092___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

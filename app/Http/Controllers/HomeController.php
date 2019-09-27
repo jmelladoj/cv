@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Video;
 use Illuminate\Http\Request;
 use SEO;
 use SEOMeta;
@@ -33,11 +34,12 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
         return view('home');
     }
 
     public function inicio(){
-        return view('inicio');
+        $videos = Video::whereIn('user_id', [1,2])->orderBy('created_at', 'DESC')->get();
+        return view('inicio')->with(compact('videos'));
     }
 }

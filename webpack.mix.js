@@ -21,10 +21,10 @@ mix.styles([
    'public/pagina/css/main.css',
 ], 'public/css/pagina.css')
 .scripts([
-   'public/pagina/js/vendor/modernizr-custom.js.js',
+   'public/pagina/js/vendor/modernizr-custom.js',
    'public/pagina/js/compressed.js',
    'public/pagina/js/main.js'
-], 'public/js/pagina.js').version();
+], 'public/js/pagina.js');
 
 mix.styles([
    'public/intranet/css/pages/login-register-lock.css',
@@ -44,4 +44,4 @@ mix.styles([
    'public/intranet/node_modules/raphael/raphael-min.js',
    'public/intranet/node_modules/morrisjs/morris.min.js',
    'public/intranet/js/dashboard1.js'
-], 'public/js/admin.js').version();
+], 'public/js/admin.js');

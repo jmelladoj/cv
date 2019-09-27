@@ -41,6 +41,7 @@ Vue.use(BootstrapVue);
 
 Vue.component('usuarios', require('./components/Usuarios.vue').default);
 Vue.component('videos', require('./components/Videos.vue').default);
+Vue.component('registrar', require('./components/Registrar.vue').default);
 
 
 /**
